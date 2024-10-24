@@ -7,7 +7,7 @@ def create_ann():
     return tf.keras.models.Sequential([
         tf.keras.layers.Flatten(input_shape=(28, 28)),
         tf.keras.layers.Dense(512, activation='relu'),
-        tf.keras.layers.Dropout(0.2),
+        tf.keras.layers.Dropout(0.1),
         tf.keras.layers.Dense(10, activation='softmax'),
     ])
 
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     model = create_ann()
     model.summary()
 
-    train_ann(model, x_train, y_train, x_test, y_test)
+    train_ann(model, x_train, y_train, x_test, y_test, 10)
     test_ann(model, x_test, y_test)
 
 
