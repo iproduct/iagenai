@@ -19,15 +19,6 @@ import datetime
 
 if __name__ == '__main__':
 
-    device_name = tf.test.gpu_device_name()
-    if not device_name:
-        raise SystemError('GPU device not found')
-    print('Found GPU at: {}'.format(device_name))
-
-    # os.environ["TF_GPU_THREAD_MODE"] = 'gpu_private'
-    # tf.config.experimental.enable_mlir_bridge()
-    # tf.config.experimental.enable_mlir_graph_optimization()
-
     model = models.Sequential()
     model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
     model.add(layers.MaxPooling2D((2, 2)))
