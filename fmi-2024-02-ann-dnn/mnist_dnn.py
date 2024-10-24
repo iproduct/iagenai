@@ -18,11 +18,6 @@ import datetime
 
 
 if __name__ == '__main__':
-    # os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-    os.environ["XLA_FLAGS"] = '--xla_gpu_cuda_data_dir="D:/Program Files/CUDA/v11.8"'
-    physical_devices = tf.config.list_physical_devices('GPU')
-    tf.config.experimental.set_memory_growth(physical_devices[0], True)  # important!
-    tf.config.optimizer.set_jit(True)
 
     device_name = tf.test.gpu_device_name()
     if not device_name:
