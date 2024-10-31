@@ -50,7 +50,7 @@ if __name__ == '__main__':
                                                      histogram_freq=1,
                                                      profile_batch='1,5')
 
-    model.fit(train_images, train_labels, epochs=5, batch_size=64, callbacks=[tboard_callback])
+    model.fit(train_images, train_labels, epochs=5, batch_size=64, validation_split=0.2, validation_freq=1, callbacks=[tboard_callback])
     test_loss, test_acc = model.evaluate(test_images, test_labels)
     print(f'Test Accuracy: {test_acc}')
     print(f'Test Loss: {test_loss}')
