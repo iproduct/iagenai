@@ -12,7 +12,7 @@ if __name__ == "__main__":
     if(cap.isOpened()):
         print('FaceTime')
         # press q to quit the webCam
-        while(cv2.waitKey(3) != ord('q')):
+        while(cv2.waitKey(1) != ord('q')):
             ret, frame = cap.read()
             cv2.imshow('webCam',frame)
         else:

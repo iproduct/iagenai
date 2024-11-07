@@ -45,6 +45,8 @@ if __name__ == '__main__':
         net.setInput(blob)
         detections = net.forward()
         count = 0
+        # print("detections shape:", detections.shape)
+        # print("detections:", detections[0, 0])
 
         # loop over the detections
         for i in range(0, detections.shape[2]):
