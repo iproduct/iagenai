@@ -21,7 +21,7 @@ if __name__ == "__main__":
     else:
         print("Successfully created the directory %s" % path)
 
-    for i in range(1,4):
+    for i in range(1,51):
         if(cap.isOpened()):
             # press q to quit the webCam
             while(cv2.waitKey(1) != ord('q')):
