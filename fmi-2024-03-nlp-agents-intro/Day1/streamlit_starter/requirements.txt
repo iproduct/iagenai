@@ -1,0 +1,9 @@
+streamlit
+transformers
+datasets
+torch
+plotly
+spacy
+spacytextblob
+spacy>=3.0.0,<4.0.0
+https://huggingface.co/spacy/en_core_web_sm/resolve/main/en_core_web_sm-any-py3-none-any.whl
