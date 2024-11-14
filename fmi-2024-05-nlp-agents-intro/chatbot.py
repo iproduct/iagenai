@@ -10,7 +10,7 @@ from gtts import gTTS #2.5.1
 
 ## for language model
 import ollama #0.5.0
-model = "maya"
+model = "maya" # "llama3.2" #"maya"
 '''
 /set system Your name is Maya. You are a spoiled russian girl with a nasty attitude and strong accent. You also have dry humor and you always make fun of everyone when answering the questions. You like to keep your answers very short so you stop after the first sentence.
 '''
@@ -20,12 +20,33 @@ import os
 from datetime import datetime
 import numpy as np
 
+import ctypes, subprocess
+from platform import system
+
+
+def windowsCommand(command):
+    ctypes.windll.winmm.mciSendStringW(command, ctypes.create_unicode_buffer(600), 559, 0);
+
+
+def play(fileName):
+    operatingSystem = system();
+
+    if (operatingSystem == "Windows"):
+        windowsCommand("open " + fileName);
+        windowsCommand("play " + fileName + " wait");
+        windowsCommand("close " + fileName);
+    else:
+        subprocess.Popen(
+            operatingSystem == "Darwin" and "exec afplay \"" + fileName + "\"" or operatingSystem == "Linux" and "exec aplay --quiet " + fileName,
+            universal_newlines=True, shell=True, stdout=-1, stderr=-1).communicate();
+
 
 # Build the AI
 class ChatBot():
     def __init__(self, name):
         print("--- starting up", name, "---")
         self.name = name.lower()
+        self.text = 'Hi Maya'
 
     def speech_to_text(self):
         recognizer = sr.Recognizer()
@@ -44,7 +65,8 @@ class ChatBot():
         print("ai --> ", text)
         speaker = gTTS(text=text, lang="en", slow=False)
         speaker.save("res.mp3")
-        os.system("afplay res.mp3")  #mac->afplay | windows->start
+        # os.system("start res.mp3")  #linux -> aplay | mac->afplay | windows->start
+        play("res.mp3")
         os.remove("res.mp3")
 
     ## predetermined commands
@@ -75,7 +97,7 @@ if __name__ == "__main__":
 
         ## what
         elif ai.what(ai.text) is True:
-            res = "I am an AI created by Mauro"
+            res = "I am an AI created by Trayan"
 
         ## action time
         elif "time" in ai.text:
