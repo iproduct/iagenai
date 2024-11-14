@@ -1,14 +1,79 @@
 import os
+
+import ollama
 from gtts import gTTS
+import speech_recognition as sr
 from play_windows import play
 
+class ChatBot():
+    def __init__(self, name, model):
+        print("--- Starting up ", name, "---")
+        self.name = name
+        self.model = model
+        self.recognizer = sr.Recognizer()
+
+
+    # Speech recognition using SpeechRecognition
+    def speech_to_text(self):
+        print("Listening ...")
+        with sr.Microphone() as mic:
+            self.recognizer.adjust_for_ambient_noise(mic, duration=1)
+            audio = self.recognizer.listen(mic)
+        try:
+            text = self.recognizer.recognize_google(audio)
+            print("You -> ", text)
+            return text
+        except Exception as e:
+            print("You -> Recognition Error", e)
+            return None
+
+    # Speech generation using gTTS
+    def text_to_speech(self, text):
+        speaker = gTTS(text=text, lang='en', slow=False)
+        speaker.save("response.mp3")
+        # os.system("start response.mp3") #linux -> aplay, mpg123 -q response.mp3; #macos -> afplay; #windows -> start""
+        play("response.mp3")
+        os.remove("response.mp3")
+
+    def run(self):
+        text= ''
+        while text is None or len(text.strip()) == 0 or ('quit' not in text.strip().lower()):
+            text = self.speech_to_text()
+            if text is not None:
+                resp = ollama.generate(model=self.model, prompt=text)['response']
+                first_sentence = resp.split('\n')[0]
+                print("AI -> ", first_sentence)
+                maya.text_to_speech(first_sentence)
+        print(text)
 
 if __name__ == "__main__":
+
+    # ChatBot demo
+    maya = ChatBot('Maya', 'llama3.2')
+    maya.run()
+    # text = maya.speech_to_text()
+    # if text is not None:
+    #     maya.text_to_speech(text)
+
+    # Speech generation using gTTS
     # text = "I'm Maya. Do you want to chat?"
-    text = "Аз съм Мая. Искаш ли да чатим?"
-    print("AI -> ", text)
-    speaker = gTTS(text=text, lang='bg', slow=False)
-    speaker.save("response.mp3")
-    # os.system("start response.mp3") #linux -> aplay, mpg123 -q response.mp3; #macos -> afplay; #windows -> start""
-    play("response.mp3")
-    os.remove("response.mp3")
+    # text = "Аз съм Мая. Искаш ли да чатим?"
+    # print("AI -> ", text)
+    # speaker = gTTS(text=text, lang='bg', slow=False)
+    # speaker.save("response.mp3")
+    # # os.system("start response.mp3") #linux -> aplay, mpg123 -q response.mp3; #macos -> afplay; #windows -> start""
+    # play("response.mp3")
+    # os.remove("response.mp3")
+
+    # Speech recognition using SpeechRecognition
+    # recognizer = sr.Recognizer()
+    # with sr.Microphone() as source:
+    #     recognizer.adjust_for_ambient_noise(source, duration=1)
+    #     print("Listening ...")
+    #     audio = recognizer.listen(source)
+    # try:
+    #    text = recognizer.recognize_google(audio)
+    #    print("You -> ", text)
+    # except Exception as e:
+    #     print("You -> Recognition Error", e.message)
+
