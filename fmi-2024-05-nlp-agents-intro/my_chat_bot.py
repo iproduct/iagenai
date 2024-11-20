@@ -61,8 +61,8 @@ class ChatBot():
 if __name__ == "__main__":
 
     # ChatBot demo
-    maya = ChatBot('Maya', 'maya')
-    maya.run()
+    maya = ChatBot('Maya', 'llama3.2')
+    # maya.run()
     # text = maya.speech_to_text()
     # if text is not None:
     #     maya.text_to_speech(text)
@@ -81,9 +81,9 @@ if __name__ == "__main__":
     # text = resp['message']['content']
     # print(text)
     # # text = "I'm Maya. Do you want to chat?"
-    # # text = "Аз съм Мая. Искаш ли да чатим?"
+    # text = "Аз съм Мая. Искаш ли да чатим?"
     # print("AI -> ", text)
-    # speaker = gTTS(text=text, lang='en', slow=False)
+    # speaker = gTTS(text=text, lang='bg', slow=False)
     # speaker.save("response.mp3")
     # # os.system("start response.mp3") #linux -> aplay, mpg123 -q response.mp3; #macos -> afplay; #windows -> start""
     # play("response.mp3")
