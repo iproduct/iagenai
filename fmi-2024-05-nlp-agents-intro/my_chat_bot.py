@@ -61,8 +61,8 @@ class ChatBot():
 if __name__ == "__main__":
 
     # ChatBot demo
-    maya = ChatBot('Maya', 'llama3.2')
-    # maya.run()
+    maya = ChatBot('Maya', 'maya')
+    maya.run()
     # text = maya.speech_to_text()
     # if text is not None:
     #     maya.text_to_speech(text)
