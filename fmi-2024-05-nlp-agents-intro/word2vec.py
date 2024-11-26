@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
         # tokenize the sentence into words
         for j in word_tokenize(i):
-            wl = regex.split("\W", j.lower())
+            wl = regex.split(r"\W", j.lower())
             temp.extend(wl)
 
         data.append(temp)
