@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Summary Report</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .summary { margin: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9; }
-        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #report {
+            background-color: #f4f4f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
     </style>
 </head>
 <body>
-    <div class="summary">
-        <h2>Executive Summary of Titanic Disaster Analysis</h2>
-        <p><strong>Number of people dead:</strong></p>
-        <ul>
-            <li>342 individuals perished in the Titanic disaster.</li>
-        </ul>
+    <div id="report">
+        <h1>Executive Summary Report</h1>
+        <p>Total Number of People Who Died:</p>
+        <p><strong>549</strong></p>
     </div>
-    <button id="approve">Approve Report</button>
+
     <script>
-        document.getElementById('approve').addEventListener('click', function() {
-            alert('Report approved successfully!');
+        document.querySelector('button').addEventListener('click', function() {
+            alert("Thank you for reviewing the report. Your feedback is valuable.");
         });
     </script>
 </body>

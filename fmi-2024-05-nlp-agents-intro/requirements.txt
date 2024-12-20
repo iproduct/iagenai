@@ -24,3 +24,4 @@ matplotlib~=3.9.2
 pyLDAvis~=3.4.1
 regex~=2024.11.6
 crewai~=0.86.0
+langchain-ollama~=0.2.2
