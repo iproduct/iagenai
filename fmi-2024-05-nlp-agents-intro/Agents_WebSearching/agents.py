@@ -11,9 +11,14 @@ import os
 from tqdm import tqdm
 
 ## for llm
-from langchain_community.llms import Ollama #0.0.38
-vision_llm = Ollama(model="llava")
-llm = Ollama(model="phi3")
+# from langchain_community.llms import Ollama #0.0.38
+# vision_llm = Ollama(model="llava")
+# llm = Ollama(model="phi3")
+
+import ollama
+from crewai import LLM
+crewai_llm = LLM(model="phi3")
+vision_llm = LLM(model="llava")
 
 ## for agents
 from langchain_community.tools import DuckDuckGoSearchRun ##6.1.7
@@ -29,11 +34,11 @@ def encode_image(path):
 path = 'data/'
 folder = [x for x in os.listdir(path) if x.endswith(('.png','.jpg','.jpeg'))]
 lst_imgs = [encode_image(path+i) for i in folder]
-vision_llm = Ollama(model="llava")
+# vision_llm = Ollama(model="llava")
 
 des = ""
 for n,img in tqdm(enumerate(lst_imgs)):
-    res = vision_llm.invoke(input=["Describe the image accurately"], images=[img])
+    res = ollama.invoke(model="llava", input=["Describe the image accurately"], images=[img])
     des = des.strip() + "\n\n" + f"image{n+1}: "+res.replace('\n',' ')
 print("\n---Data---\n"+des)
 
@@ -66,7 +71,7 @@ agent_photograper = crewai.Agent(
      ''',
     tools=[tool_instagram], 
     max_iter=3,
-    llm=llm,
+    llm=crewai_llm,
     allow_delegation=False, verbose=True)
 
 ## Task
@@ -90,7 +95,7 @@ agent_social = crewai.Agent(
      ''',
     tools=[tool_instagram], 
     max_iter=3,
-    llm=llm,
+    llm=crewai_llm,
     allow_delegation=False, verbose=True)
 
 ## Task
@@ -114,7 +119,7 @@ agent_manager = crewai.Agent(
      At the end of the process, you MUST ask the human for final approval, use the human input tool. 
      ''',
     max_iter=3,
-    llm=llm,
+    llm=crewai_llm,
     allow_delegation=True, verbose=True)
 
 ## Task
