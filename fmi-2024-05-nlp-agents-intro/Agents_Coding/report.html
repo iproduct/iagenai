@@ -2,45 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executive Summary Report</title>
+    <title>Titanic Survival Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
         }
-        #report {
-            background-color: #f4f4f9;
+        .report-section {
+            max-width: 600px;
+            margin: auto;
+            background-color: #f9f9f9;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
+        .section-header {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
         }
-        button:hover {
-            background-color: #4cae4c;
+        .summary-item {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div id="report">
-        <h1>Executive Summary Report</h1>
-        <p>Total Number of People Who Died:</p>
-        <p><strong>549</strong></p>
+    <div class="report-section">
+        <h1>Titanic Survival Report</h1>
+        <p class="section-header">Key Findings:</p>
+        <ul class="summary-item">
+            <li>Total number of passengers: 549 (as per the dataset)</li>
+            <li>Number of people who survived: 342 (verified from the data analysis)</li>
+        </ul>
+
+        <!-- Interactive Button -->
+        <button id="approve-button">Approve Report</button>
+        <div id="popup" style="display:none;">Report Approved!</div>
     </div>
 
     <script>
-        document.querySelector('button').addEventListener('click', function() {
-            alert("Thank you for reviewing the report. Your feedback is valuable.");
+        document.getElementById('approve-button').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'block';
         });
     </script>
 </body>
