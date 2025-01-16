@@ -1,3 +1,6 @@
 tensorflow~=2.16.2
 keras~=3.6.0
 matplotlib~=3.9.2
+torch~=2.5.1+cu118
+torchvision~=0.20.1+cu118
+torchaudio~=2.5.1+cu118
