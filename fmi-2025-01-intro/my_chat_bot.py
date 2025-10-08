@@ -1,5 +1,7 @@
 import ollama
-
+from gtts import gTTS
+import soundfile as sf
+import sounddevice as sd
 
 class ChatBot:
     def __init__(self, name, model):
@@ -15,6 +17,14 @@ class ChatBot:
                 """
             }
         ]
+
+    def speech_to_text(self, message):
+        audio_obj = gTTS(text = message, leang='en', slow=False)
+        audio_obj.save(self.name + '.mp3')
+        audio_arr, sample_rate = sf.read(self.name + '.mp3')
+        sd.play(audio_arr, sample_rate)
+        sd.wait()
+
 
     def run(self):
         while True:
