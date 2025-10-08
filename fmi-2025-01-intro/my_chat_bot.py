@@ -20,7 +20,7 @@ class ChatBot:
             }
         ]
 
-    def speech_to_text(self, message):
+    def speech_to_text(self):
         print('Listening ...')
         with sr.Microphone() as mic:
             self.recognizer.adjust_for_ambient_noise(mic)
@@ -41,7 +41,9 @@ class ChatBot:
 
     def run(self):
         while True:
-            text = input('>')
+            text = self.speech_to_text()# input('>')
+            if text is None:
+                continue
             if text == 'quit':
                 break
             print(f'U: {text}')
