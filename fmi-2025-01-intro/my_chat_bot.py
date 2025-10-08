@@ -20,6 +20,10 @@ class ChatBot:
             }
         ]
 
+    def is_quit_command(self, text):
+        lst = ["quit", "finish", "exit", "bye"]
+        return True if any(i in text.lower() for i in lst) else False
+
     def speech_to_text(self):
         print('Listening ...')
         with sr.Microphone() as mic:
@@ -44,7 +48,7 @@ class ChatBot:
             text = self.speech_to_text()# input('>')
             if text is None:
                 continue
-            if text == 'quit':
+            if self.is_quit_command(text):
                 break
             print(f'U: {text}')
             self.messages.append({'role': 'user', 'content': text})
