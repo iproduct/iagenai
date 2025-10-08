@@ -19,7 +19,10 @@ class ChatBot:
         ]
 
     def speech_to_text(self, message):
-        audio_obj = gTTS(text = message, leang='en', slow=False)
+        pass
+
+    def text_to_speech(self, message):
+        audio_obj = gTTS(text = message, lang='en', slow=False)
         audio_obj.save(self.name + '.mp3')
         audio_arr, sample_rate = sf.read(self.name + '.mp3')
         sd.play(audio_arr, sample_rate)
@@ -36,6 +39,7 @@ class ChatBot:
             resp = ollama.chat(model = self.model, messages = self.messages)
             resp_text = resp['message']['content']
             print(f'AI: {resp_text}')
+            self.text_to_speech(resp_text)
             self.messages.append({'role': 'system', 'content': resp_text})
 
 if __name__ == '__main__':
