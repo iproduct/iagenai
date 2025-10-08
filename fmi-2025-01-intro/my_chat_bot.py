@@ -2,11 +2,13 @@ import ollama
 from gtts import gTTS
 import soundfile as sf
 import sounddevice as sd
+import speech_recognition as sr
 
 class ChatBot:
     def __init__(self, name, model):
         self.name = name
         self.model = model
+        self.recognizer = sr.Recognizer()
         self.messages = [
             {
                 'role': 'system',
@@ -19,7 +21,15 @@ class ChatBot:
         ]
 
     def speech_to_text(self, message):
-        pass
+        print('Listening ...')
+        with sr.Microphone() as mic:
+            self.recognizer.adjust_for_ambient_noise(mic)
+            audio = self.recognizer.listen(mic)
+            try:
+                text = self.recognizer.recognize_google(audio, language='en')
+                return text
+            except Exception as ex:
+                print("Recognition error: ", ex)
 
     def text_to_speech(self, message):
         audio_obj = gTTS(text = message, lang='en', slow=False)
