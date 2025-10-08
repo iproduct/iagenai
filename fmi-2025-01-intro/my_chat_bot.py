@@ -48,8 +48,6 @@ class ChatBot:
             text = self.speech_to_text()# input('>')
             if text is None:
                 continue
-            if self.is_quit_command(text):
-                break
             print(f'U: {text}')
             self.messages.append({'role': 'user', 'content': text})
             resp = ollama.chat(model = self.model, messages = self.messages)
@@ -57,6 +55,8 @@ class ChatBot:
             print(f'AI: {resp_text}')
             self.text_to_speech(resp_text)
             self.messages.append({'role': 'system', 'content': resp_text})
+            if self.is_quit_command(text):
+                break
 
 if __name__ == '__main__':
     #ChatBot demo
