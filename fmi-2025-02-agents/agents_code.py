@@ -94,16 +94,15 @@ if __name__ == '__main__':
     allow_delegation=False,
     verbose=True)
 
-## Task
-task_sql = crewai.Task(
-    description=prompt,
-    agent=agent_sql,
-    expected_output='''Output of the query'''
-)
-#%% md
-#### Test single Agent
-#%%
-crew = crewai.Crew(agents=[agent_sql], tasks=[task_sql], verbose=False)
-res = crew.kickoff(inputs={"user_input":"how many people died? Return a plain number."})
-# res = crew.kickoff(inputs={"user_input":"how many people survived?"})
-print("\nResponse:\n", res)
+    ## Task
+    task_sql = crewai.Task(
+        description=prompt,
+        agent=agent_sql,
+        expected_output='''Output of the query'''
+    )
+
+    # Test DB Agent
+    crew = crewai.Crew(agents=[agent_sql], tasks=[task_sql], verbose=False)
+    res = crew.kickoff(inputs={"user_input":"how many people died? Return a plain number."})
+    # res = crew.kickoff(inputs={"user_input":"how many people survived?"})
+    print("\nResponse:\n", res)
