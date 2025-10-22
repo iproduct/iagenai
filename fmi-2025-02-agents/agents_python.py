@@ -12,8 +12,9 @@ from langchain_experimental.utilities import PythonREPL
 from langchain_core.tools import Tool
 
 llm = OllamaLLM(model="qwen3:8b")
-# crewai_llm = LLM(model="ollama/codestral:latest ")
-crewai_llm = LLM(model="ollama/qwen3:8b")
+crewai_llm = LLM(model="ollama/gemma3:4b ")
+# crewai_llm = LLM(model="ollama/codestral:latest")
+# crewai_llm = LLM(model="ollama/qwen3:8b")
 
 # create sqlite db from Titanic dataset
 dtf = pd.read_csv("data_titanic.csv")
@@ -90,12 +91,13 @@ task_sql = crewai.Task(
 )
 
 # Python code execution tool
-tool_pycode = Tool(name="tool_pycode",
-    description='''
+@tool("tool_pycode")
+def tool_pycode(code: str):
+    """
     A Python shell. Use this to execute python commands. Input should be a valid python command. 
     If you want to see the output of a value, you should print it out with `print(...)`.
-    ''',
-    func=PythonREPL().run)
+    """
+    return PythonREPL().run(code)
 
 @tool("tool_eval")
 def tool_eval(code: str) -> str:
@@ -148,9 +150,10 @@ if __name__ == '__main__':
     result = tool_pycode.run("import numpy as np; print(np.sum([1,2]))")
     print(f'\n{result}')
 
-    print(tool_eval.run("print(Res:')"))
+    # print(tool_eval.run("print(Res:')"))
 
     # Calling data-scinetist agent
     os.environ['LITELLM_LOG'] = 'DEBUG'  # litellm.set_verbose=True
     crew = crewai.Crew(agents=[agent_py], tasks=[task_py], verbose=True)
     res = crew.kickoff(inputs={"user_input": f"how many people died in this dataset? {dtf.to_string()}"})
+    print(res)
