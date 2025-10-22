@@ -103,6 +103,6 @@ if __name__ == '__main__':
 
     # Test DB Agent
     crew = crewai.Crew(agents=[agent_sql], tasks=[task_sql], verbose=False)
-    res = crew.kickoff(inputs={"user_input":"how many people died? Return a plain number."})
+    res = crew.kickoff(inputs={"user_input":"how many people died? Return a plain number. Return <final answer>  ONLY IF returned by `tool_query otherwise continue thinking."})
     # res = crew.kickoff(inputs={"user_input":"how many people survived?"})
     print("\nResponse:\n", res)
