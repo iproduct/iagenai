@@ -17,7 +17,7 @@ llm = OllamaLLM(model="qwen3:8b")
 crewai_llm = LLM(model="ollama/qwen3:8b")
 
 # create sqlite db from Titanic dataset
-dtf = pd.read_csv("data_titanic.csv")
+dtf = pd.read_csv("data/data_titanic.csv")
 print(dtf.head(3))
 dtf.to_sql(index=False, name='titanic', con=sqlite3.connect("titanic.db"), if_exists='replace')
 

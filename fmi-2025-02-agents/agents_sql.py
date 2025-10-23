@@ -18,7 +18,7 @@ from langchain_community.tools import ListSQLDatabaseTool, InfoSQLDatabaseTool, 
 from langchain_community.utilities.sql_database import SQLDatabase
 
 if __name__ == '__main__':
-    dtf = pd.read_csv("data_titanic.csv")
+    dtf = pd.read_csv("data/data_titanic.csv")
     print(dtf.head(3))
     # llm = OllamaLLM(model="qwen3:8b")
 
@@ -106,6 +106,6 @@ if __name__ == '__main__':
 
     # Test DB Agent
     crew = crewai.Crew(agents=[agent_sql], tasks=[task_sql], verbose=False)
-    res = crew.kickoff(inputs={"user_input":"how many people died? Return a plain number. Return <final answer>  ONLY IF returned by `tool_query otherwise continue thinking."})
+    res = crew.kickoff(inputs={"user_input":"how many people died? Return a plain number. Return <final answer>  ONLY IF returned by `tool_query` otherwise continue thinking."})
     # res = crew.kickoff(inputs={"user_input":"how many people survived?"})
     print("\nResponse:\n", res)
