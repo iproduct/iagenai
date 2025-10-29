@@ -1,10 +1,8 @@
 import os
 
 import crewai
-import litellm
 import pandas as pd
 from crewai import LLM, Agent, Task, Crew, Process
-from crewai.project import agent, task
 from crewai.tools import tool, BaseTool
 from crewai_tools import DirectoryReadTool, FileReadTool
 from langchain_experimental.utilities import PythonREPL

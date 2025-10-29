@@ -1,15 +1,4 @@
-import os
-
 import crewai
-import pandas as pd
-from crewai import LLM
-from crewai.tools import tool
-from langchain_community.utilities import SQLDatabase
-from langchain_ollama import OllamaLLM
-import sqlite3
-from langchain_community.tools import ListSQLDatabaseTool, InfoSQLDatabaseTool, QuerySQLDatabaseTool, QuerySQLCheckerTool
-from langchain_experimental.utilities import PythonREPL
-from langchain_core.tools import Tool
 
 from agents_sql import  agent_sql, task_sql
 from agents_python import data_analyst, task_py

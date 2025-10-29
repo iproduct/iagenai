@@ -1,18 +1,9 @@
 import os
 
 import crewai
-import litellm
-import pandas as pd
 from crewai import LLM, Agent, Task, Crew, Process
-from crewai.agents.agent_builder.base_agent import BaseAgent
-from crewai.project import agent, task, CrewBase
-from crewai.tools import tool, BaseTool
-from langchain_experimental.utilities import PythonREPL
-from crewai_tools import DirectoryReadTool, FileReadTool
-from agents_python import data_analyst, task_py
-from agents_sql import task_sql
 
-# create sqlite db from Titanic dataset
+from agents_python import data_analyst, task_py
 
 # llm = LLM(model="ollama/mannix/deepseek-coder-v2-lite-instruct:latest")
 # llm = LLM(model="ollama/gemma3:4b")
