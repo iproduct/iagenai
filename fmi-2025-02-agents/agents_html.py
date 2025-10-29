@@ -29,7 +29,7 @@ agent_html = crewai.Agent(
     goal=prompt,
     backstory='''
         You are an experienced web developer that writes beautiful reports using HTML and CSS.
-        You always summarize texts into bullet points containing the most important details.
+        You always summarize texts into bullet points containing the answer to the question and noting more.
         At the end add an interactive button with JavaScript so the user can approve the report,
         and if the user clicks the button, show a pop-up text.
      ''',
@@ -42,7 +42,7 @@ agent_html = crewai.Agent(
 task_html = crewai.Task(
     description=prompt,
     agent=agent_html,
-    context=[task_sql],
+    context=[task_py],
     expected_output='''HTML code''')
 
 if __name__ == '__main__':

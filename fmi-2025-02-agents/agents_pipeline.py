@@ -17,8 +17,8 @@ from agents_html import agent_html, task_html
 
 
 if __name__ == '__main__':
-    crew = crewai.Crew(agents=[agent_sql, agent_html],
-                       tasks=[task_sql, task_html],
+    crew = crewai.Crew(agents=[agent_sql, data_analyst, agent_html],
+                       tasks=[task_sql, task_py, task_html],
                        process=crewai.Process.sequential,
                        verbose=True)
 
