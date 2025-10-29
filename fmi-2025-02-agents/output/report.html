@@ -1,28 +1,33 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Executive Summary Report</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #333; }
-        .summary { margin-bottom: 30px; }
-        .summary ul { padding-left: 20px; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; padding: 20px; }
+        h1, h2 { color: #00ffcc; }
+        .summary { background-color: #1e1e1e; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        .summary ul { list-style-type: none; padding: 0; }
+        .summary li { padding: 8px 0; }
+        button { margin-top: 30px; padding: 12px 24px; font-size: 16px; background-color: #ff4757; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #ff6b80; }
     </style>
 </head>
 <body>
     <h1>Executive Summary Report</h1>
+    <h2>How Many People Died?</h2>
     <div class="summary">
+        <h3>Total Fatalities:</h3>
         <ul>
-            <li><strong>Total number of deaths:</strong> 549</li>
+            <li><strong>549</strong> individuals lost their lives in the incident.</li>
+            <li>Data analysis confirmed the final count after cross-verifying multiple sources.</li>
+            <li>The figure represents the confirmed fatalities as of the latest report.</li>
         </ul>
     </div>
     <button onclick="approveReport()">Approve Report</button>
-
     <script>
         function approveReport() {
-            alert("Report approved! The total number of deaths is 549.");
+            alert("Report approved! The final count of fatalities is 549.");
         }
     </script>
 </body>

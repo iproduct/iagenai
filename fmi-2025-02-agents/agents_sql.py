@@ -20,7 +20,7 @@ from langchain_community.utilities.sql_database import SQLDatabase
 # llm = OllamaLLM(model="qwen3:8b")
 
 # crewai_llm = LLM(model="ollama/mannix/deepseek-coder-v2-lite-instruct:latest")
-# crewai_llm = LLM(model="ollama/codestral:latest ")
+# crewai_llm = LLM(model="ollama/codestral:latest")
 llm = LLM(model="ollama/qwen3:8b")
 
 
