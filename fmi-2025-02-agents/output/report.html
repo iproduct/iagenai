@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Executive Summary Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        .summary { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        ul { list-style-type: none; padding-left: 0; }
+        ul li { padding: 10px 0; border-bottom: 1px solid #ddd; }
+        button { margin-top: 30px; padding: 12px 24px; font-size: 16px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <h1>Executive Summary Report</h1>
+    <div class="summary">
+        <ul>
+            <li><strong>Total number of deaths:</strong> <span style="color: #d9534f; font-size: 24px;">549</span></li>
+            <li><strong>Data Source:</strong> Analyzed dataset from the provided context [(549,)]</li>
+            <li><strong>Key Insight:</strong> The dataset indicates 549 fatalities were recorded in the specified timeframe.</li>
+        </ul>
+    </div>
+    <button onclick="approveReport()">Approve Report</button>
+    <script>
+        function approveReport() {
+            alert("Report approved! The total number of deaths is 549.");
+        }
+    </script>
+</body>
+</html>

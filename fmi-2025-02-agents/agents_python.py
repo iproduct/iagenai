@@ -7,8 +7,10 @@ from crewai import LLM, Agent, Task, Crew, Process
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai.project import agent, task, CrewBase
 from crewai.tools import tool, BaseTool
-from langchain_experimental.utilities import PythonREPL
 from crewai_tools import DirectoryReadTool, FileReadTool
+from langchain_experimental.utilities import PythonREPL
+
+from agents_sql import  task_sql
 
 # create sqlite db from Titanic dataset
 dtf = pd.read_csv("data/data_titanic.csv")
@@ -19,6 +21,7 @@ print(dtf.head(3))
 # llm = LLM(model="ollama/gemma3:4b")
 # llm = LLM(model="ollama/codestral:latest")
 llm = LLM(model="ollama/qwen3:8b")
+# llm = LLM(model="ollama/chevalblanc/gpt-4o-mini")
 
 # Python Data Analyst Agent & Task
 prompt = '''Extract data with Python code to answer the question '{question}', by loading the dataset from file '{file}' in directory '{directory}' using appropriate tools.
@@ -64,12 +67,11 @@ def tool_eval(python_code: str) -> str:
     """
     res = llm.call(messages='''review the following python code and correct it if you find errors.
     You must return very short answer in json format {"answer":<answer_as_text>, "code":<corrected_python_code>}:\n''' + python_code)
+    print(f'!!! Validating: {python_code}\n !!! Corrected: {res}')
     return res
 
 ## Agent
-@agent
-def data_analyst() -> Agent:
-    return crewai.Agent(
+data_analyst = crewai.Agent(
         role="Data Analyst",
         goal=prompt,
         backstory='''
@@ -86,7 +88,6 @@ def data_analyst() -> Agent:
         allow_delegation=False,
         verbose=True
     )
-agent = data_analyst()
 
 
 ## Task
@@ -94,8 +95,8 @@ agent = data_analyst()
 def question_answer_task() -> Task:
     return Task(
         description=prompt,
-        agent=agent,
-        # context=[task_sql],
+        agent=data_analyst,
+        context=[task_sql],
         expected_output='''Output of `tool_pycode`.'''
     )
 
@@ -115,7 +116,7 @@ if __name__ == '__main__':
     result = tool_pycode.run("import numpy as np; print(np.sum([1,2]))")
     print(f'\n{result}')
 
-    # print(tool_eval.run("print(Res:')"))
+    print(tool_eval.run("print(Res:')"))
 
     # Calling data-scinetist agent
     os.environ['LITELLM_LOG'] = 'DEBUG'
