@@ -2,28 +2,39 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 
-# Select numeric features
+# Preprocess data
 df = pd.read_csv("../data/data_titanic.csv")
-numeric_cols = ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare']
-X = df[numeric_cols]
+X = df.drop(['Survived', 'Name', 'Ticket', 'Cabin', 'PassengerId'], axis=1)
 y = df['Survived']
 
-# Split into train and test sets
+# Define preprocessing pipeline
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('cat', OneHotEncoder(), ['Sex', 'Embarked']),
+        ('num', Pipeline([
+            ('imputer', SimpleImputer(strategy='mean')),
+            ('passthrough', 'passthrough')
+        ]), ['Age', 'Fare', 'SibSp', 'Parch'])
+    ])
+
+# Create model pipeline
+model = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', LogisticRegression())
+])
+
+# Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Impute missing values
-imputer = SimpleImputer(strategy='mean')
-X_train_imputed = imputer.fit_transform(X_train)
-X_test_imputed = imputer.transform(X_test)
+# Train model
+model.fit(X_train, y_train)
 
-# Train logistic regression model
-model = LogisticRegression()
-model.fit(X_train_imputed, y_train)
-
-# Predict and evaluate
-y_pred = model.predict(X_test_imputed)
+# Evaluate model
+y_pred = model.predict(X_test)
 score = accuracy_score(y_test, y_pred)
-
 print(score)

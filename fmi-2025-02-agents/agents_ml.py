@@ -17,4 +17,5 @@ if __name__ == '__main__':
             Then train a simple classification to predict the column `Survived`.
             Then use the score to evaluate the model predictions.
             Run the generated Python program and print the results to the console.
-            Prefix python code with 'python' instead of 'py'.''')
+            Prefix python code with 'python' instead of 'py'.
+            Print the results to the console.''')
