@@ -22,20 +22,20 @@ if __name__ == '__main__':
                 "Allen, Mr. William Henry",
                 "Bonnell, Miss. Elizabeth",
             ],
-            "Age": [22, 35, 58],
+            # "Age": ages,
             "Sex": ["male", "male", "female"],
         }
     )
     df = df.join(ages)
     print(df)
-    print(df["Age"])
+    print(df["Ages"].values)
 
 
     air_quality = pd.read_csv("data/air_quality_no2.csv", index_col=0, parse_dates=True)
     print(air_quality.head())
     # air_quality.plot()
 
-    x = np.arange(0, 5, 0.1)
-    y = np.sin(x)
-    plt.plot(x, y)
-    plt.show()
+    # x = np.arange(0, 5, 0.1)
+    # y = np.sin(x)
+    # plt.plot(x, y)
+    # plt.show()
