@@ -8,9 +8,9 @@ if __name__ == '__main__':
     y = [data[i, 1] for i in range(data.shape[0])][1:]
     print(y)
 
-    # plt.plot(range(20), y)
-    # plt.show()
-    plt.hist(y, bins=10, range=(0, 80000))
-    plt.title("Histogram")
+    plt.plot(range(20), y)
+    plt.show()
+    # plt.hist(y, bins=10, range=(0, 80000))
+    # plt.title("Histogram")
 
     plt.show()
