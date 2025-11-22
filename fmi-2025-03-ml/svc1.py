@@ -14,7 +14,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # 2. Train an SVC with an RBF kernel
-clf = SVC(kernel="rbf", C=1.0, gamma="scale")
+clf = SVC(kernel='poly', degree=2, C=1.0, gamma="scale")
 clf.fit(X_train, y_train)
 
 # 3. Predict and evaluate
@@ -37,7 +37,7 @@ def plot_decision_boundary(model, X, y):
 
     plt.contourf(xx, yy, Z, alpha=0.2)
     plt.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor="k")
-    plt.title("SVC Decision Boundary (RBF Kernel)")
+    plt.title("SVC Decision Boundary (Polynomial deg=2 Kernel)")
     plt.show()
 
 plot_decision_boundary(clf, X, y)
