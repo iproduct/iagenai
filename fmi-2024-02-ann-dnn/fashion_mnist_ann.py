@@ -1,7 +1,8 @@
 import  matplotlib.pyplot as plt
 import tensorflow as tf
 import keras
-from keras.api.datasets import fashion_mnist
+from keras.api.datasets import fashion_mnist, mnist
+
 
 def create_ann():
     return tf.keras.models.Sequential([
@@ -22,7 +23,8 @@ def test_ann(model, x_test, y_test):
 
 if __name__ == "__main__":
     print(keras.__version__)
-    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+    # (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train, x_test = x_train / 255.0, x_test / 255.0
 
     print(x_train.ndim, x_train.shape, x_train.dtype)
