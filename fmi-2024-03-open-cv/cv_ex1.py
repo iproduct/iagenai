@@ -7,7 +7,7 @@ if __name__ == "__main__":
     # read the color image
     img1 = cv2.imread('lena.bmp')
     # img.shape : size of the image --> row,column,depth
-    print(img1.shape)
+    print(img1.shape, img1.dtype)
     print(type(img1))
     # pop up window for image show
     # cv2.imshow(title_name, image_array)
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     # cv2.imread(image_name,flag)
     # flag=1 (defalut): color , flag=0:grayscale
     img2 = cv2.imread('lena.bmp',cv2.IMREAD_GRAYSCALE)
-    print(img2.shape)
+    print(img2.shape, img2.dtype)
     # # system will pause until it gets pressed key in 5000 ms
     # p=cv2.waitKey(5000)
     # # show the pressed key in ASCII code, if no key is pressed, p=-1
