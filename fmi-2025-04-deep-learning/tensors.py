@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.api.datasets import mnist
-from keras.api.datasets import mnist
+from keras.datasets import mnist
 
 if __name__ == '__main__':
     t = np.array(12)

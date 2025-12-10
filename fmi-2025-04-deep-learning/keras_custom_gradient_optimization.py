@@ -8,10 +8,10 @@ from keras.utils import to_categorical
 import os
 
 if __name__ == '__main__':
-    os.environ["XLA_FLAGS"] = '--xla_gpu_cuda_data_dir="D:/Program Files/CUDA/v11.2/development"'
-    physical_devices = tf.config.list_physical_devices('GPU')
-    tf.config.experimental.set_memory_growth(physical_devices[0], True) # important!
-    tf.config.optimizer.set_jit(True)
+    # os.environ["XLA_FLAGS"] = '--xla_gpu_cuda_data_dir="D:/Program Files/CUDA/v11.2/development"'
+    # physical_devices = tf.config.list_physical_devices('GPU')
+    # tf.config.experimental.set_memory_growth(physical_devices[0], True) # important!
+    # tf.config.optimizer.set_jit(True)
 
     (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
     train_images = train_images.reshape((60000, 28 * 28))
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     optimizer = tf.keras.optimizers.Adam()
 
     # Prepare a loss function.
-    loss_fn = tf.keras.losses.kl_divergence
+    loss_fn = tf.keras.losses.KLDivergence
     # loss_object = tf.keras.losses.MeanSquaredError()
 
 

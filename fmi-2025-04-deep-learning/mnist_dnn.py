@@ -1,4 +1,6 @@
-from keras import layers
+import os
+os.environ['KERAS_BACKEND'] = 'torch'
+from keras import layers, backend
 from keras import models
 from keras.datasets import mnist
 from keras.utils import to_categorical
@@ -18,9 +20,15 @@ import datetime
 
 
 if __name__ == '__main__':
-
+    if backend.backend() == "torch":
+        # When using the torch backend,
+        # torch needs to be imported first, otherwise it will segfault
+        # upon import.
+        import torch
+    print(backend.backend())
     model = models.Sequential()
-    model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)))
+    model.add(layers.Input((28, 28, 1)))
+    model.add(layers.Conv2D(32, (3, 3), activation='relu'))
     model.add(layers.MaxPooling2D((2, 2)))
     model.add(layers.Conv2D(64, (3, 3), activation='relu'))
     model.add(layers.MaxPooling2D((2, 2)))
@@ -46,11 +54,13 @@ if __name__ == '__main__':
     # print(tf.config.optimizer.get_experimental_options())
 
     logdir = os.path.join("logs", datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
-    tboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir,
+    if backend.backend() == "tensorflow":
+        tboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir,
                                                      histogram_freq=1,
                                                      profile_batch='1,5')
-
-    model.fit(train_images, train_labels, epochs=5, batch_size=64, validation_split=0.2, validation_freq=1, callbacks=[tboard_callback])
+        model.fit(train_images, train_labels, epochs=5, batch_size=64, validation_split=0.2, validation_freq=1, callbacks=[tboard_callback])
+    else:
+        model.fit(train_images, train_labels, epochs=5, batch_size=64, validation_split=0.2, validation_freq=1)
     test_loss, test_acc = model.evaluate(test_images, test_labels)
     print(f'Test Accuracy: {test_acc}')
     print(f'Test Loss: {test_loss}')
