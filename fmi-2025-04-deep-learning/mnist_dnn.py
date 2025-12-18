@@ -1,5 +1,6 @@
 import os
-os.environ['KERAS_BACKEND'] = 'torch'
+# os.environ['KERAS_BACKEND'] = 'tensorflow' # OR 'torch'
+
 from keras import layers, backend
 from keras import models
 from keras.datasets import mnist
