@@ -15,17 +15,18 @@ import streamlit as st #1.35.0
 ######################## Backend ##############################
 class AI():
 	def __init__(self):
-		db = chromadb.PersistentClient()
+		db = chromadb.PersistentClient(path="D:/CourseIAGenAI/git/iagenai/fmi-2025-05-nlp_llm/RAG/chroma")
 		self.collection = db.get_or_create_collection("nvidia")
 
 	def query(self, q, top=10):
 		res_db = self.collection.query(query_texts=[q])["documents"][0][0:top]
+		print('res_db len = ', len(res_db))
 		context = ' '.join(res_db).replace("\n", " ")
 		return context
 
-	def respond(self, lst_messages, model="phi3", use_knowledge=False):
+	def respond(self, lst_messages, model="llama3.2", use_knowledge=False):
 		q = lst_messages[-1]["content"]
-		context = self.query(q)
+		context = self.query(q, top=30)
 
 		if use_knowledge:
 			prompt = "Give the most accurate answer using your knowledge and the folling additional information: \n"+context
