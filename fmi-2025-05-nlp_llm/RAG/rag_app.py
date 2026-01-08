@@ -16,11 +16,12 @@ import streamlit as st #1.35.0
 class AI():
 	def __init__(self):
 		db = chromadb.PersistentClient(path="D:/CourseIAGenAI/git/iagenai/fmi-2025-05-nlp_llm/RAG/chroma")
+		print(db.list_collections())
 		self.collection = db.get_or_create_collection("nvidia")
 
 	def query(self, q, top=10):
 		res_db = self.collection.query(query_texts=[q])["documents"][0][0:top]
-		print('res_db len = ', len(res_db))
+		print('Query:', q, 'res_db len = ', len(res_db))
 		context = ' '.join(res_db).replace("\n", " ")
 		return context
 
