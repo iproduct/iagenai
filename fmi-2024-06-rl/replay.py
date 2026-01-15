@@ -48,7 +48,7 @@ for e in range(episodes):
 
         action = mario.act(state)
 
-        next_state, reward, done, truncated, info = env.step(action)
+        next_state, reward, done, info = env.step(action)
 
         mario.cache(state, next_state, action, reward, done)
 
