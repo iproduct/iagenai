@@ -38,9 +38,9 @@ class MyChatBot:
         sd.wait()
 
     def speech_to_text(self):
-        print(f'{self.name} is listening ...')
         with sr.Microphone() as source:
             self.recognizer.adjust_for_ambient_noise(source)
+            print(f'{self.name} is listening ...')
             audio = self.recognizer.listen(source)
             try:
                 text = self.recognizer.recognize_google(audio, language='en')
@@ -52,15 +52,25 @@ class MyChatBot:
 
     def run(self):
         while True:
-            message = input("> ")
-            if self.is_quit_command(message):
-                break
+            # message = input("> ")
+            message = self.speech_to_text()
+            if not message:
+                continue
+            print(f'U: {message}')
             self.messages.append({
                 'role':'user',
                 'content': message
             })
             resp = ollama.chat(model=self.model, messages=self.messages)
-            print(resp.message.content)
+            resp_message = resp.message.content
+            print(f'{self.name}:{resp_message}')
+            self.text_to_speech(resp_message)
+            self.messages.append({
+                'role': 'system',
+                'content': f"""{resp_message}"""
+            })
+            if self.is_quit_command(message):
+                break
 
 if __name__ == '__main__':
     bot = MyChatBot(name="Maya", model="llama3.2:latest")
