@@ -91,6 +91,6 @@ if __name__ == "__main__":
     o3d.visualization.draw_geometries([pcd, smoothed_pcd], window_name="Smoothed point cloud")
 
     # 3. Visualize Result
-    o3d.visualization.draw_geometries([mesh], window_name="Generated Mesh from MLS Cloud")
+    o3d.visualization.draw_geometries([mesh], window_name="Generated Mesh from MLS Cloud", point_show_normal=True)
 
 

@@ -10,7 +10,7 @@ from gtts import gTTS #2.5.1
 
 ## for language model
 import ollama #0.5.0
-model = "maya" # "llama3.2" #"maya"
+model = 'llama3.2' #"maya"
 '''
 /set system Your name is Maya. You are a spoiled russian girl with a nasty attitude and strong accent. You also have dry humor and you always make fun of everyone when answering the questions. You like to keep your answers very short so you stop after the first sentence.
 '''
