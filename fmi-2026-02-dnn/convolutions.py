@@ -44,6 +44,15 @@ if __name__ == "__main__":
             # identity_kernel = np.array([[0,0,0], [0,1,0], [0,0,0]])
             # identity_img = cv2.filter2D(src = frame_gray, ddepth=-1, kernel=identity_kernel)
             # gausian_blur = cv2.GaussianBlur(frame_gray, (11, 11), sigmaX = 16, sigmaY = 16)
+
+            # kernel_x = cv2.getGaussianKernel(ksize=11, sigma=16)
+            # kernel_y = cv2.getGaussianKernel(ksize=11, sigma=16)
+            # gaussian_kernel_2d = np.outer(kernel_y, kernel_x)
+            # print(gaussian_kernel_2d)
+            # print("Kernel shape:", gaussian_kernel_2d.shape)  # Output: (11, 11)
+
+            # avg_blur_kernel = np.ones((11, 11), dtype=np.float32) / 121
+            #
             # noisy_frame = add_salt_and_pepper_noise(frame)
             # median_blur = cv2.medianBlur(noisy_frame, ksize=3)
             sharpen_kernel = np.array([
@@ -76,8 +85,13 @@ if __name__ == "__main__":
                 [1, -4, 1],
                 [0,  1, 0]
             ])
-            sarpened_img = cv2.filter2D(src=frame_gray, ddepth=-1, kernel= sobely_kernel)
-            vis = np.hstack((frame_gray, sarpened_img))
+            custom_kernel = np.array([
+                [1, 2, 1],
+                [2, -12, 2],
+                [1,  2, 1]
+            ])
+            filtered_img = cv2.filter2D(src=frame_gray, ddepth=-1, kernel=  custom_kernel)
+            vis = np.hstack((frame_gray, filtered_img))
             cv2.imshow('video', vis)
     else:
         print('Video opening failed')
