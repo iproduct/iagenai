@@ -16,7 +16,7 @@ print(dtf.head(3))
 # llm = LLM(model="ollama/mannix/deepseek-coder-v2-lite-instruct:latest")
 # llm = LLM(model="ollama/gemma3:4b")
 # llm = LLM(model="ollama/codestral:latest")
-llm = LLM(model="ollama/qwen3:8b")
+llm = LLM(model="ollama/qwen3.5:9b")
 # llm = LLM(model="ollama/chevalblanc/gpt-4o-mini")
 
 # Python Data Analyst Agent & Task

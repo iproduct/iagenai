@@ -21,7 +21,7 @@ from langchain_community.utilities.sql_database import SQLDatabase
 
 # crewai_llm = LLM(model="ollama/mannix/deepseek-coder-v2-lite-instruct:latest")
 # crewai_llm = LLM(model="ollama/codestral:latest")
-llm = LLM(model="ollama/qwen3:8b")
+llm = LLM(model="ollama/qwen3.5:9b")
 
 
 
